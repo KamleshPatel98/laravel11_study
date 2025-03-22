@@ -12,20 +12,20 @@ class Input extends Component
      * Create a new component instance.
      */
     public $title;
-    public $type;
     public $name;
+    public $type;
     public $id;
     public $value;
     public $maxlength;
     public $onkeyup;
     public $placeholder;
     public $required;
-    public function __construct($title, $type = 'text', $name, $id = '', $value = '', $maxlength = 255,
+    public function __construct($title, $name, $type='text', $id = '', $value = '', $maxlength = 255,
         $onkeyup = '', $placeholder = '', $required = false)
     {
         $this->title = $title;
-        $this->type = $type;
         $this->name = $name;
+        $this->type = $type;
         $this->id = $id;
         $this->value = $value;
         $this->maxlength = $maxlength;
