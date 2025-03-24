@@ -25,7 +25,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->status }}</td>
-                                        <td>{{ $row->id }}</td>
+                                        <td>
+                                            <x-edit-delete editLink="{{ route('brands.edit',$row) }}" deleteLink="{{ route('brands.destroy',$row) }}" />
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
@@ -42,12 +44,18 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    Add Brand
+                    {{ isset($brand) ? 'Update' : 'Add' }} Brand
                 </div>
                 <div class="card-body">
+                    @if (isset($brand))
+                    <form action="{{ route('brands.update',$brand) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                    @else
                     <form action="{{ route('brands.store') }}" method="POST">
                         @csrf
-                        <x-input title="{{ 'Name' }}" name="{{ 'name' }}" required maxlength="100"/>
+                    @endif
+                        <x-input title="{{ 'Name' }}" name="{{ 'name' }}" value="{{ old('name',isset($brand->name) ? $brand->name : '') }}" required maxlength="100"/>
                         <br>
                         <x-submit-reset />
                     </form>

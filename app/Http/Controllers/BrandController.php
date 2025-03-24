@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BrandController extends Controller
 {
@@ -61,8 +62,19 @@ class BrandController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Brand $brand)
-    {
-        //
+    { 
+        $request->validate([
+            'name' => [
+                'required','max:100','string',
+                Rule::unique('brands')->ignore($brand->id) 
+            ],
+        ]);
+        try {
+            Brand::where('id',$brand->id)->update(['name'=>$request->name]);
+            return to_route('brands.index')->with('success','Brand updated successfully!');
+        } catch (\Exception $ex) {
+            return back()->with('error',$ex->getMessage());
+        }
     }
 
     /**
@@ -70,6 +82,11 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        try {
+            $brand->delete();
+            return to_route('brands.index')->with('success','Brand deleted successfully!');
+        } catch (\Exception $ex) {
+            return back()->with('error',$ex->getMessage());
+        }
     }
 }

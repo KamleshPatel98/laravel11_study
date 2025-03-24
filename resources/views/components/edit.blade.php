@@ -1,0 +1,1 @@
+<a href="{{ $editLink }}" class="btn btn-sm btn-primary me-2"><i class="fa-solid fa-pen-to-square"></i></a>
