@@ -20,6 +20,7 @@ class Input extends Component
     public $onkeyup;
     public $placeholder;
     public $required;
+    // required parameter first then optional
     public function __construct($title, $name, $type='text', $id = '', $value = '', $maxlength = 255,
         $onkeyup = '', $placeholder = '', $required = false)
     {

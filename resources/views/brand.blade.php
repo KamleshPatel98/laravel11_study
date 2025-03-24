@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container">
+    <x-alert />
     <div class="row mt-3">
         <div class="col-md-8">
             <div class="card">
@@ -45,7 +46,10 @@
                 </div>
                 <div class="card-body">
                     <form action="{{ route('brands.store') }}" method="POST">
+                        @csrf
                         <x-input title="{{ 'Name' }}" name="{{ 'name' }}" required maxlength="100"/>
+                        <br>
+                        <x-submit-reset />
                     </form>
                 </div>
             </div>

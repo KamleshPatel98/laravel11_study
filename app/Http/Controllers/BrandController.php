@@ -29,7 +29,15 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'name'=>'required|max:100|string|unique:brands'
+        ]);
+        try {
+            Brand::create(['name'=>$request->name]);
+            return back()->with('success','Brand added successfully!');
+        } catch (\Exception $ex) {
+            return back()->with('error',$ex->getMessage());
+        }
     }
 
     /**
