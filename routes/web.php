@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use \App\Models\Brand;
 use \App\Models\User;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,3 +41,11 @@ Route::get('explicit/{users_email}',[UserController::class,'explicit']);
 Route::resource('brands', BrandController::class);
 
 
+// Authentication
+Route::get('login',[AuthController::class,'login'])->name('login');
+Route::post('login-submit',[AuthController::class,'loginSubmit'])->name('loginSubmit');
+
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard',[AuthController::class,'dashboard'])->name('dashboard');
+    Route::get('logout',[AuthController::class,'logout'])->name('logout');
+});
