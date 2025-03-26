@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::view('component','component');
 
-//Implict Route Model Binding
+//Implicit Route Model Binding
 //1 simple 
 Route::get('users1/{user}', function (User $user){
     return $user;
