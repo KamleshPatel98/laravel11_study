@@ -33,5 +33,10 @@ Route::get('users5/{user:email}',[UserController::class,'show5']);
 Route::get('users6/{user}/{brand}',[UserController::class,'show6']);
 
 
+// Explicit route model binding
+Route::get('explicit/{users_email}',[UserController::class,'explicit']);
+
 // MVC CRUD
 Route::resource('brands', BrandController::class);
+
+

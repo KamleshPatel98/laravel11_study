@@ -19,4 +19,9 @@ class UserController extends Controller
     public function show6(User $user, Brand $brand){
         return $user . $brand;
     }
+
+    // explicit route model binding
+    public function explicit($user){
+        return $user;
+    }
 }
