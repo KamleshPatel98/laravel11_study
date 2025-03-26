@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-// use App\Models\Brand;
+use App\Models\Brand;
 
 class UserController extends Controller
 {
@@ -16,7 +16,7 @@ class UserController extends Controller
         return $user;
     }
 
-    // public function show6(User $user, Brand $brand){
-    //     return $user;
-    // }
+    public function show6(User $user, Brand $brand){
+        return $user . $brand;
+    }
 }
