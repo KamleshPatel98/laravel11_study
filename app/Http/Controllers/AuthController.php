@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
+use App\Mail\LoginMail;
+use Mail;
 
 class AuthController extends Controller
 {
@@ -19,6 +21,11 @@ class AuthController extends Controller
         ]);
         try {
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+                $data = [
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                ];
+                Mail::to("kamleshp52170@gmail.com")->send(new LoginMail($data));
                 return Auth::user();
             }else{
                 return back()->with("error","Invalid credentials");
