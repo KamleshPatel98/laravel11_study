@@ -21,6 +21,7 @@ class LoginMail extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
+        
     }
 
     /**
@@ -40,6 +41,7 @@ class LoginMail extends Mailable
     {
         return new Content(
             view: 'mail.login',
+            with: ['data'=>$this->data]
         );
     }
 

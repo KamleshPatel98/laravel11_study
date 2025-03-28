@@ -7,6 +7,7 @@ use Auth;
 use Session;
 use App\Mail\LoginMail;
 use Mail;
+use App\Jobs\LoginMailJob;
 
 class AuthController extends Controller
 {
@@ -21,11 +22,8 @@ class AuthController extends Controller
         ]);
         try {
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-                $data = [
-                    'name' => Auth::user()->name,
-                    'email' => Auth::user()->email,
-                ];
-                Mail::to("kamleshp52170@gmail.com")->send(new LoginMail($data));
+                $email = "kamleshp52170@gmail.com";
+                dispatch(new LoginMailJob($email));
                 return Auth::user();
             }else{
                 return back()->with("error","Invalid credentials");
