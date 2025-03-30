@@ -58,3 +58,7 @@ Route::get('clear',function(){
     Artisan::call('optimize');
     return "route:clear,  config:clear, route:cache, config:cache, optimize successfully";
 });
+
+Route::get('welcome',function(){
+    return view('welcome');
+});
