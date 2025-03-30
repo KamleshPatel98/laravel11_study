@@ -49,3 +49,12 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard',[AuthController::class,'dashboard'])->name('dashboard');
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
 });
+
+Route::get('clear',function(){
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('route:cache');
+    Artisan::call('config:cache');
+    Artisan::call('optimize');
+    return "route:clear,  config:clear, route:cache, config:cache, optimize successfully";
+});
