@@ -11,10 +11,13 @@ use Mail;
 class AuthController extends Controller
 {
     public function login(){
+        if(Auth::check()){
+            return to_route('dashboard');
+        }
         return view('login');
     }
 
-    public function loginSubmit(Request $request){
+    public function loginSubmit(Request $request){ 
         $request->validate([
             'email' => 'required|max:70|email|exists:users',
             'password' => 'required|max:12|min:8|string'
@@ -36,12 +39,14 @@ class AuthController extends Controller
     }
 
     public function dashboard(){
-        return Auth::user();
+        $user = Auth::user();
+        $user['image'] = Auth::user()->image;
+        return view('admin.dashboard',compact('user'));
     }
 
     public function logout(){
         Auth::logout();
         Session::flush();
-        return to_route()->with("logout successfully!");
+        return to_route('login')->with("logout successfully!");
     }
 }

@@ -44,4 +44,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getCreatedAtAttribute($value){
+        return date('d-M-Y', strtotime($value));
+    }
+
+    public function getImageAttribute($value){
+        return asset('images/'.'admin.png');
+    }
 }
