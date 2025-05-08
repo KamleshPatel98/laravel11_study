@@ -6,6 +6,7 @@ use \App\Models\Brand;
 use \App\Models\User;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HttpController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,3 +50,5 @@ Route::middleware('auth')->group(function () {
     Route::get('dashboard',[AuthController::class,'dashboard'])->name('dashboard');
     Route::get('logout',[AuthController::class,'logout'])->name('logout');
 });
+
+Route::get('http-get',[HttpController::class,'index']);
