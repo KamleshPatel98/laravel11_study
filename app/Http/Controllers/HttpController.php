@@ -11,4 +11,16 @@ class HttpController extends Controller
         $http = Http::get('https://dummyjson.com/comments');
         return $http->json();
     }
+
+    public function login(){
+        $user = Http::post('https://dummyjson.com/auth/login',[
+            'username'=> 'emilys',
+            'password'=> 'emilyspass'
+        ]);
+        return response()->json([
+            'status' => true,
+            'message' => 'Login successful.',
+            'data' => $user->json(),
+        ], 200);
+    }
 }

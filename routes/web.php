@@ -52,3 +52,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('http-get',[HttpController::class,'index']);
+Route::get('http-login',[HttpController::class,'login']);
