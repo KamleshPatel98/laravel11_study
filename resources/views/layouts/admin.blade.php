@@ -19,5 +19,7 @@
         @yield('content')
 
         <script src="{{ asset('assets/admin/bootstrap/bootstrap.min.js') }}"></script>
+
+        @stack('scripts')
     </body>
 </html>
